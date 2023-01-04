@@ -36,8 +36,10 @@
     position: absolute;
     left: 12px;
   }
+  
+  /* cuando esta hecha una tarea color  */
   .Icon-check--active {
-    color: #4caf50;
+    color: #30b130;
   }
   
   .Icon-delete {

@@ -22,6 +22,7 @@ function App() {
   const totalTodos = todos.length;
   // Creamos una nueva variable en donde guardaremos las coincidencias con la búsqueda
   
+  //FILTRAR
   let searchedTodos = [];   //SI EL USUARIO NO ESCRIBE NADA, VA A SER IGUAL A LISTA DE todos, SI USUARIO ESCRIBE ALGO es setTodos
   // Lógica para filtrar
   if (!searchValue.length >= 1) {
@@ -34,6 +35,30 @@ function App() {
     });
   }
   
+////MARCAR COMO COMPLETADO
+  const completeTodo = (text) => { // el complete ingresa el texto de los todos
+    const todoIndex = todos.findIndex(todo => todo.text === text); // busca la posición dentro del array
+    const newTodos = [...todos];   //strange operator... ingresa todos los todo    clonar la lista de todos
+    newTodos[todoIndex].completed = true; 
+    // todos[todoIndex] = {    //FORMA 2 DE LO ANTERIOR
+    //   text: todos[todoIndex].text;  // el texto se busca a si mismo en el texto con la posicion
+    //   completed: true;
+    // }
+    setTodos(newTodos);   // RE RENDER RECIBE NUEVA LISTA DE TODOS
+  };
+ 
+///// BORRAR CON LA X 
+  const deleteTodo = (text) => {
+    const todoIndex = todos.findIndex(todo => todo.text === text);
+    const newTodos = [...todos];
+    newTodos.splice(todoIndex, 1);  //splice es para BORRARRRR !! cortar rebanada de pan desde la posicion todoindex, sacar 1 rebanada (1 todo)
+    setTodos(newTodos);
+  };
+  
+
+
+
+
   return (
     <React.Fragment>
       <TodoCounter
@@ -52,6 +77,8 @@ function App() {
             key={todo.text}
             text={todo.text}
             completed={todo.completed}
+            onComplete={() => completeTodo(todo.text)} 
+            ondelete={() => deleteTodo(todo.text)} 
           />
         ))}
       </TodoList>
