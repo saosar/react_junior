@@ -1,4 +1,5 @@
-body {
+/* SIN IMPORTAR EL LINK DE GOOGLE EN index.html de public */
+/* body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -10,4 +11,19 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+} */
+
+/*IMPORTANDO EL LINK */
+body {
+  margin: 0;
+  padding: 0;
+  background: #F2F4F5;
+  color: #1E1E1F;
+  font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+}
+
+#root {
+  margin: 0 24px;
+  position: relative;
+  min-height: 100vh;
 }
