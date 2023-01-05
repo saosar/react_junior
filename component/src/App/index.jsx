@@ -3,27 +3,29 @@ import { AppUI } from './AppUI';
 
 // import './App.css';
 
-const defaultTodos = [
-  { text: 'Cortar el cabello', completed: true },
-  { text: 'Tomar el curso de React', completed: false },
-  { text: 'Bañarse', completed: true },
-  { text: 'Reunión Indatum 2pm', completed: false },
-];
+// const defaultTodos = [
+//   { text: 'Cortar el cabello', completed: true },
+//   { text: 'Tomar el curso de React', completed: false },
+//   { text: 'Bañarse', completed: true },
+//   { text: 'Reunión Indatum 2pm', completed: false },
+// ];
+
+
 
 function App() {
 
-  // const localStorageTodos = localStorage.getItem('TODOS_V1');
-  // let parsedTodos;
+  const localStorageTodos = localStorage.getItem('TODOS_V1');
+  let parsedTodos;
 
-  // if (!localStorageTodos) {   //SI NUNCA HAN CREADO ALGO //SI SI HAN HECHO TODOS
-  //   localStorage.setItem('TODOS_V1', JSON.stringify([]));
-  //   parsedTodos = [];
-  // } else {
-  //   parsedTodos = JSON.parse(localStorageTodos);
-  // }
+  if (!localStorageTodos) {   //SI NUNCA HAN CREADO ALGO //SI SI HAN HECHO TODOS
+    localStorage.setItem('TODOS_V1', JSON.stringify([])); //EN CONSOLA APARECE ARRAY VACIO
+    parsedTodos = []; // ESTADO POR DEFECTO ES ARRAY VACIO
+  } else {
+    parsedTodos = JSON.parse(localStorageTodos);
+  }
 
 
-  const [todos, setTodos] = React.useState(defaultTodos);  //defaultTodos vs parsedTodos
+  const [todos, setTodos] = React.useState(parsedTodos);  //defaultTodos vs parsedTodos
   // El estado de nuestra búsqueda
   const [searchValue, setSearchValue] = React.useState('');
 
@@ -43,7 +45,15 @@ function App() {
       return todoText.includes(searchText);    // EL TEXTO INCLUYE ALGO DE LO QUE SE PUSO EN BUSQUEDA?
     });
   }
-  
+
+  const saveTodos = (newTodos) => { //VAMOS A GUARDAR EL ESTADO NO SOLO EN TODO SINO EN LOCALSTORAGE
+    const stringifiedTodos = JSON.stringify(newTodos);
+    localStorage.setItem('TODOS_V1', stringifiedTodos); // SE GUARDA EN INFO PAGINA
+    setTodos(newTodos);   //SI SE BORRA SE BORRA - SE PERSISTEN DATOS
+  };
+
+
+
 ////MARCAR COMO COMPLETADO
   const completeTodo = (text) => { // el complete ingresa el texto de los todos
     const todoIndex = todos.findIndex(todo => todo.text === text); // busca la posición dentro del array
@@ -53,7 +63,7 @@ function App() {
     //   text: todos[todoIndex].text;  // el texto se busca a si mismo en el texto con la posicion
     //   completed: true;
     // }
-    setTodos(newTodos);   // RE RENDER RECIBE NUEVA LISTA DE TODOS
+    saveTodos(newTodos);   // RE RENDER RECIBE NUEVA LISTA DE TODOS
   };
  
 ///// BORRAR CON LA X 
@@ -61,7 +71,7 @@ function App() {
     const todoIndex = todos.findIndex(todo => todo.text === text);
     const newTodos = [...todos];
     newTodos.splice(todoIndex, 1);  //splice es para BORRARRRR !! cortar rebanada de pan desde la posicion todoindex, sacar 1 rebanada (1 todo)
-    setTodos(newTodos);
+    saveTodos(newTodos);
   };
   
   return (   // MANDAR LAS PROPIEDADES QUE SE LLAMAN EN AppUI
