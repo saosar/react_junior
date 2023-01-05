@@ -11,21 +11,36 @@ import { AppUI } from './AppUI';
 // ];
 
 
+//* HOOK #1 *// para no poner tanto React.useStage
+function useLocalStorage (itemName, initialValue){
+  const localStorageItem = localStorage.getItem(itemName);
+  let parsedItem;
+  if (!localStorageItem) {   //SI NUNCA HAN CREADO ALGO //SI SI HAN HECHO TODOS
+    localStorage.setItem(itemName, JSON.stringify(initialValue)); //EN CONSOLA APARECE ARRAY VACIO
+    parsedItem = initialValue; // ESTADO POR DEFECTO ES ARRAY VACIO
+  } else {
+    parsedItem = JSON.parse(localStorageItem);
+  }
+  
+  const [item, setItem] = React.useState(parsedItem);  //defaultTodos vs parsedTodos
+
+  const saveItem = (newItem) => { //VAMOS A GUARDAR EL ESTADO NO SOLO EN TODO SINO EN LOCALSTORAGE
+    const stringifiedItem = JSON.stringify(newItem);
+    localStorage.setItem(itemName, stringifiedItem); // SE GUARDA EN INFO PAGINA
+    setItem(newItem);   //SI SE BORRA SE BORRA - SE PERSISTEN DATOS
+  }; //GUARDA ACTUALIZACION LOCAL STORAGE Y ESTADO DE REACT
+
+  return [
+    item,
+    saveItem,   
+  ];
+}
+
+
 
 function App() {
-
-  const localStorageTodos = localStorage.getItem('TODOS_V1');
-  let parsedTodos;
-
-  if (!localStorageTodos) {   //SI NUNCA HAN CREADO ALGO //SI SI HAN HECHO TODOS
-    localStorage.setItem('TODOS_V1', JSON.stringify([])); //EN CONSOLA APARECE ARRAY VACIO
-    parsedTodos = []; // ESTADO POR DEFECTO ES ARRAY VACIO
-  } else {
-    parsedTodos = JSON.parse(localStorageTodos);
-  }
-
-
-  const [todos, setTodos] = React.useState(parsedTodos);  //defaultTodos vs parsedTodos
+  const [todos, saveTodos] = useLocalStorage('TODOS_V1', []);
+  
   // El estado de nuestra búsqueda
   const [searchValue, setSearchValue] = React.useState('');
 
@@ -34,7 +49,7 @@ function App() {
   // Creamos una nueva variable en donde guardaremos las coincidencias con la búsqueda
   
   //FILTRAR
-  let searchedTodos = [];   //SI EL USUARIO NO ESCRIBE NADA, VA A SER IGUAL A LISTA DE todos, SI USUARIO ESCRIBE ALGO es setTodos
+  let searchedTodos = [];   //SI EL USUARIO NO ESCRIBE NADA, VA A SER IGUAL A LISTA DE Todos, SI USUARIO ESCRIBE ALGO es setTodos
   // Lógica para filtrar
   if (!searchValue.length >= 1) {
     searchedTodos = todos;
@@ -45,12 +60,6 @@ function App() {
       return todoText.includes(searchText);    // EL TEXTO INCLUYE ALGO DE LO QUE SE PUSO EN BUSQUEDA?
     });
   }
-
-  const saveTodos = (newTodos) => { //VAMOS A GUARDAR EL ESTADO NO SOLO EN TODO SINO EN LOCALSTORAGE
-    const stringifiedTodos = JSON.stringify(newTodos);
-    localStorage.setItem('TODOS_V1', stringifiedTodos); // SE GUARDA EN INFO PAGINA
-    setTodos(newTodos);   //SI SE BORRA SE BORRA - SE PERSISTEN DATOS
-  };
 
 
 
@@ -73,6 +82,9 @@ function App() {
     newTodos.splice(todoIndex, 1);  //splice es para BORRARRRR !! cortar rebanada de pan desde la posicion todoindex, sacar 1 rebanada (1 todo)
     saveTodos(newTodos);
   };
+
+  //* HOOK #2 *// para el uso de efectos ejemplo consumo de API, carga, error o espera.
+  // React.useEffect(funcion, [dato1, dato2, datoN])
   
   return (   // MANDAR LAS PROPIEDADES QUE SE LLAMAN EN AppUI
     <AppUI 
