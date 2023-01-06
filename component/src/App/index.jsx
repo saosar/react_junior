@@ -1,93 +1,104 @@
 import React from 'react';
 import { AppUI } from './AppUI';
 
-// import './App.css';
-
 // const defaultTodos = [
-//   { text: 'Cortar el cabello', completed: true },
-//   { text: 'Tomar el curso de React', completed: false },
-//   { text: 'Bañarse', completed: true },
-//   { text: 'Reunión Indatum 2pm', completed: false },
+//   { text: 'Cortar cebolla', completed: true },
+//   { text: 'Tomar el cursso de intro a React', completed: false },
+//   { text: 'Llorar con la llorona', completed: true },
+//   { text: 'LALALALAA', completed: false },
 // ];
 
-
-//* HOOK #1 *// para no poner tanto React.useStage
-function useLocalStorage (itemName, initialValue){
-  const localStorageItem = localStorage.getItem(itemName);
-  let parsedItem;
-  if (!localStorageItem) {   //SI NUNCA HAN CREADO ALGO //SI SI HAN HECHO TODOS
-    localStorage.setItem(itemName, JSON.stringify(initialValue)); //EN CONSOLA APARECE ARRAY VACIO
-    parsedItem = initialValue; // ESTADO POR DEFECTO ES ARRAY VACIO
-  } else {
-    parsedItem = JSON.parse(localStorageItem);
-  }
+function useLocalStorage(itemName, initialValue) {
+   // Creamos el estado inicial para nuestros errores y carga
+  const [error, setError] = React.useState(false); // CREAR ESTADO DE ERROR
+  const [loading, setLoading] = React.useState(true);   // CREAR ESTADO DE CARGA
+  const [item, setItem] = React.useState(initialValue);  //VALOR INICIAL POR DEFECTO
   
-  const [item, setItem] = React.useState(parsedItem);  //defaultTodos vs parsedTodos
+  React.useEffect(() => {   // 
+    // Simulamos un segundo de delay de carga 
+    setTimeout(() => {
+       // Manejamos la tarea dentro de un try/catch por si ocurre algún error
+      
+       try {  //ejecuta cierta parte del codigo y reacciona al ERROR !!!!111
+        const localStorageItem = localStorage.getItem(itemName);
+        let parsedItem;
+        
+        if (!localStorageItem) {
+          localStorage.setItem(itemName, JSON.stringify(initialValue));
+          parsedItem = initialValue;
+        } else {
+          parsedItem = JSON.parse(localStorageItem);
+        }
 
-  const saveItem = (newItem) => { //VAMOS A GUARDAR EL ESTADO NO SOLO EN TODO SINO EN LOCALSTORAGE
-    const stringifiedItem = JSON.stringify(newItem);
-    localStorage.setItem(itemName, stringifiedItem); // SE GUARDA EN INFO PAGINA
-    setItem(newItem);   //SI SE BORRA SE BORRA - SE PERSISTEN DATOS
-  }; //GUARDA ACTUALIZACION LOCAL STORAGE Y ESTADO DE REACT
+        setItem(parsedItem);  //cuando pase el tiempo llama a setItem para actualizar el estado
+        setLoading(false);     //TODO FUNCIONO EN LA CARGA
+      } catch(error) {
+        // En caso de un error lo guardamos en el estado
+        setError(error);
+      }
+    }, 1000);   ///que espere un segundo
+  });
+  
+  const saveItem = (newItem) => { 
+    try {
+      const stringifiedItem = JSON.stringify(newItem);
+      localStorage.setItem(itemName, stringifiedItem);
+      setItem(newItem);
+    } catch(error) {
+      setError(error);
+    }
+  };
 
-  return [
+  return {   // CUANDO HAY MAS DE UN ESTADO ES MEJOR UN OBJETO{} QUE UN ARRAY[]
     item,
-    saveItem,   
-  ];
+    saveItem,
+    loading,
+    error,
+  };
 }
 
-
-
 function App() {
-  const [todos, saveTodos] = useLocalStorage('TODOS_V1', []);
-  
-  // El estado de nuestra búsqueda
+  const {     //TRAEMOS UN OBJETO{}
+    item: todos,
+    saveItem: saveTodos,
+    loading,
+    error,
+  } = useLocalStorage('TODOS_V1', []);
   const [searchValue, setSearchValue] = React.useState('');
 
   const completedTodos = todos.filter(todo => !!todo.completed).length;
   const totalTodos = todos.length;
-  // Creamos una nueva variable en donde guardaremos las coincidencias con la búsqueda
-  
-  //FILTRAR
-  let searchedTodos = [];   //SI EL USUARIO NO ESCRIBE NADA, VA A SER IGUAL A LISTA DE Todos, SI USUARIO ESCRIBE ALGO es setTodos
-  // Lógica para filtrar
+
+  let searchedTodos = [];
+
   if (!searchValue.length >= 1) {
     searchedTodos = todos;
   } else {
-    searchedTodos = todos.filter(todo => {     // SE SACA LA VARIABLE DONDE EL USUARIO INGRESA DATOS
-      const todoText = todo.text.toLowerCase();    // NO IMPORTA SI MAYUSCULA O MINUSCULA --CONVIERTE A minuscula
-      const searchText = searchValue.toLowerCase(); //
-      return todoText.includes(searchText);    // EL TEXTO INCLUYE ALGO DE LO QUE SE PUSO EN BUSQUEDA?
+    searchedTodos = todos.filter(todo => {
+      const todoText = todo.text.toLowerCase();
+      const searchText = searchValue.toLowerCase();
+      return todoText.includes(searchText);
     });
   }
 
-
-
-////MARCAR COMO COMPLETADO
-  const completeTodo = (text) => { // el complete ingresa el texto de los todos
-    const todoIndex = todos.findIndex(todo => todo.text === text); // busca la posición dentro del array
-    const newTodos = [...todos];   //strange operator... ingresa todos los todo    clonar la lista de todos
-    newTodos[todoIndex].completed = true; 
-    // todos[todoIndex] = {    //FORMA 2 DE LO ANTERIOR
-    //   text: todos[todoIndex].text;  // el texto se busca a si mismo en el texto con la posicion
-    //   completed: true;
-    // }
-    saveTodos(newTodos);   // RE RENDER RECIBE NUEVA LISTA DE TODOS
-  };
- 
-///// BORRAR CON LA X 
-  const deleteTodo = (text) => {
+  const completeTodo = (text) => {
     const todoIndex = todos.findIndex(todo => todo.text === text);
     const newTodos = [...todos];
-    newTodos.splice(todoIndex, 1);  //splice es para BORRARRRR !! cortar rebanada de pan desde la posicion todoindex, sacar 1 rebanada (1 todo)
+    newTodos[todoIndex].completed = true;
     saveTodos(newTodos);
   };
 
-  //* HOOK #2 *// para el uso de efectos ejemplo consumo de API, carga, error o espera.
-  // React.useEffect(funcion, [dato1, dato2, datoN])
-  
-  return (   // MANDAR LAS PROPIEDADES QUE SE LLAMAN EN AppUI
-    <AppUI 
+  const deleteTodo = (text) => {
+    const todoIndex = todos.findIndex(todo => todo.text === text);
+    const newTodos = [...todos];
+    newTodos.splice(todoIndex, 1);
+    saveTodos(newTodos);
+  };
+
+  return (
+    <AppUI
+      loading={loading}
+      error={error}
       totalTodos={totalTodos}
       completedTodos={completedTodos}
       searchValue={searchValue}
@@ -95,7 +106,6 @@ function App() {
       searchedTodos={searchedTodos}
       completeTodo={completeTodo}
       deleteTodo={deleteTodo}
-    
     />
   );
 }
