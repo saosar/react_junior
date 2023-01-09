@@ -16,7 +16,7 @@ function TodoForm() {
     setNewTodoValue(event.target.value);
   };
   
-  // Función para cerrar el modal
+  // Función para cerrar el modal luego de añadir
   const onCancel = () => {
     setOpenModal(false);
   };
@@ -39,7 +39,7 @@ function TodoForm() {
       <textarea
         value={newTodoValue}
         onChange={onChange}
-        placeholder="Cortar la cebolla para el almuerzo"
+        placeholder="Ejemplo: Realizar un curso de..."
       />
       <div className="TodoForm-buttonContainer">
         <button
