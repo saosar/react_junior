@@ -18,6 +18,10 @@
   
     transform: rotate(0);
     transition: .3s ease;
+
+
+    /* SIN IMPORTAR QUE HAYA APAREZCA DELANTE (a menos de un z index superior)*/
+    z-index: 1; 
   }
   
   .CreateTodoButton:hover {
