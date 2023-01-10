@@ -1,19 +1,24 @@
 .TodoItem {
     background-color: #da95e8b9;
     position: relative;
-    display: flex;
+    display: flex;  /*todo dentro de cajon*/
     justify-content: center;
     align-items: center;
-    margin-top: 24px;
-    box-shadow: 0px 5px 50px rgba(191, 110, 228, 0.15);
+    margin-top: 15px;
+    box-shadow: 0px 5px 30px rgba(191, 110, 228, 0.15);
+
+    width: 570px;
+    border-radius: 20px;
+    border: 2px solid #bf71d979;
+    margin-left: 22%;
   }
   
   .TodoItem-p {
-    margin: 24px 0 24px 24px;
+    margin: 7px 0 7px 7px;
     width: calc(100% - 120px);
     font-size: 18px;
     line-height: 24px;
-    font-weight: 400;
+    font-weight: 50;
   }
   .TodoItem-p--complete {
     text-decoration: line-through;

@@ -1,0 +1,26 @@
+body {
+    overflow: hidden;
+    /* tamaño de todo */
+    width: 1024px;
+    /* Mover toda la pagina a derecha */
+    margin-left: 10%;
+    text-align: center;
+}
+
+
+.progress{
+    width: 56%;
+    margin-left: 22%;
+    border-radius: 20px;
+    border: 2px solid #bf71d979;
+    height: 1cm;
+}
+
+h1 {color: #999;
+    width:100%;
+    margin-left: 50;
+    /* text-align: center; */
+    font-family: 'Times New Roman';
+    /* tamaño letra */
+    font-size: 30px;
+}

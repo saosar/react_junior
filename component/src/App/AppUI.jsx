@@ -8,6 +8,7 @@ import { TodoItem } from '../TodoItem';
 import { TodoForm } from '../TodoForm';
 import { CreateTodoButton } from '../CreateTodoButton';
 import { Modal } from '../Modal';
+import { Bootstrap } from '../Bootstrap';
 
 function AppUI() {
   const {
@@ -22,16 +23,18 @@ function AppUI() {
 
   return (
     <React.Fragment>
+      
       <TodoCounter />
       <TodoSearch />
       
         {/* RENDER PROPS QUE ENVIAN FUNCION DE LA SIGUIENTE MANERA */}
-        
+          
           <TodoList>
-            {error && <p>Desespérate, hubo un error...</p>}
+            {error && <p>Desespérate, hubo un error...</p>}            
             {loading && <p>Estamos cargando, no desesperes...</p>}
             {(!loading && !searchedTodos.length) && <p>¡Crea tu primer TODO!</p>}
             
+
             {searchedTodos.map(todo => (
               <TodoItem
                 key={todo.text}
@@ -48,6 +51,8 @@ function AppUI() {
               <TodoForm/>
             </Modal>
           )}
+          
+          <Bootstrap />
 
       <CreateTodoButton
         setOpenModal={setOpenModal}

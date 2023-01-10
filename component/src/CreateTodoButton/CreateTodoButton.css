@@ -1,15 +1,20 @@
 .CreateTodoButton {
-    background-color: #d061c1;
-    box-shadow: 0px 5px 25px rgba(212, 250, 97, 0.5);
+    background-color: #e2addb;
+    box-shadow: 0px 5px 5px rgba(86, 182, 211, 0.37);
     border: none;
-    border-radius: 50%;
+    /* curva del boton  */
+    border-radius: 30%;
     cursor: pointer;
+    /* Tamaño de la cruz */
     font-size: 50px;
+    /* fixed es abajo a la derecha */
     position: fixed;
-    bottom: 24px;
-    right: 24px;
+    top: 90px;  /*desde abajo a arriba*/
+    /* right: 100px;   de derecha a izquierda */
+    margin-left: 36%;
+
     font-weight: bold;
-    color: #FAFAFA;
+    color: #bf49d6; /*color de la cruz*/
     display: flex;
     justify-content: center;
     align-items: center;
