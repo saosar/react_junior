@@ -10,6 +10,9 @@ import { CreateTodoButton } from '../CreateTodoButton';
 import { Modal } from '../Modal';
 import { Bootstrap } from '../Bootstrap';
 
+// import { Scroller } from '../Scroll';
+
+
 function AppUI() {
   const {
     error,
@@ -22,6 +25,7 @@ function AppUI() {
   } = React.useContext(TodoContext);
 
   return (
+  
     <React.Fragment>
       
       <TodoCounter />
@@ -57,7 +61,10 @@ function AppUI() {
       <CreateTodoButton
         setOpenModal={setOpenModal}
       />
+
+      {/* <Scroller></Scroller> */}
     </React.Fragment>
+    
   );
 }
 

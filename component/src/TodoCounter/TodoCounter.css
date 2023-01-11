@@ -4,6 +4,26 @@
     /* margin: 0; */
     margin-left: 100;
     padding: 48px;
-    
+
     color: rgb(206, 48, 172);
   }
+
+header {
+    margin: 0;
+    padding: 0%;
+    position: relative;
+    height: 100px;
+
+    background: #af68e25d;
+    box-shadow: inset 0 -1px 0 rgba(250, 250, 250, 0.4), rgba(192, 99, 161, 0.4) 0 1px 20px, inset 0 1px 0 rgb(255 255 255 / 20%);
+    background-size: 20px 20px, auto;
+
+}
+
+body {
+  height: 2000px;
+  /* background: #af68e22d; */
+  box-shadow: inset 0 -1px 0 rgba(250, 250, 250, 0.4), rgba(192, 99, 161, 0.4) 0 1px 20px, inset 0 1px 0 rgb(255 255 255 / 20%);
+  background-size: 200px 200px, auto;
+
+}

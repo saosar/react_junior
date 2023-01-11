@@ -1,4 +1,16 @@
 .TodoItem {
+    /*PARA QUE SE ACOMODE ALA PAGINA SUPUESTAMENTE*/
+    display: grid;
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(
+        150px,
+        1fr
+      )
+    );
+    gap: 16px;  /*para un esacio*/ 
+    /* de aqui hacia arriba no funciona*/
+
     background-color: #da95e8b9;
     position: relative;
     display: flex;  /*todo dentro de cajon*/
