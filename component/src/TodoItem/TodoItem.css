@@ -10,7 +10,7 @@
     );
     gap: 16px;  /*para un esacio*/ 
     /* de aqui hacia arriba no funciona*/
-
+/*COLOR DE LAS TAREAS*/
     background-color: #da95e8b9;
     position: relative;
     display: flex;  /*todo dentro de cajon*/
@@ -23,6 +23,7 @@
     border-radius: 20px;
     border: 2px solid #bf71d979;
     margin-left: 22%;
+    
   }
   
   .TodoItem-p {
@@ -31,6 +32,7 @@
     font-size: 18px;
     line-height: 24px;
     font-weight: 50;
+    
   }
   .TodoItem-p--complete {
     text-decoration: line-through;
@@ -47,6 +49,7 @@
     font-size: 24px;
     font-weight: bold;
     /* background-color: #CCC; */
+    
   }
   
   .Icon-check {

@@ -9,6 +9,8 @@ import { TodoForm } from '../TodoForm';
 import { CreateTodoButton } from '../CreateTodoButton';
 import { Modal } from '../Modal';
 import { Bootstrap } from '../Bootstrap';
+import { Imagen } from '../Imagen';
+// import corazon from '../Imagen/corazon.png';
 
 // import { Scroller } from '../Scroll';
 
@@ -29,6 +31,7 @@ function AppUI() {
     <React.Fragment>
       
       <TodoCounter />
+      
       <TodoSearch />
       
         {/* RENDER PROPS QUE ENVIAN FUNCION DE LA SIGUIENTE MANERA */}
@@ -57,6 +60,7 @@ function AppUI() {
           )}
           
           <Bootstrap />
+          <Imagen />
 
       <CreateTodoButton
         setOpenModal={setOpenModal}

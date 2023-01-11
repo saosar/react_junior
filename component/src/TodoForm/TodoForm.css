@@ -1,13 +1,15 @@
 form { /*fondo*/
     width: 90%;
     max-width: 500px;
-    background-color: #fff;
+    /* color de fondo del cajon que pregunta el formulario */
+    background-color: rgb(247, 242, 242);
     padding: 33px 40px;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     border-radius: 50px;
+    
   }
   
   label { /* titulo*/
@@ -16,10 +18,11 @@ form { /*fondo*/
     font-size: 20px;
     color: #c93cb1;
     margin-bottom: 26px;
+    
   }
   
   textarea { /* cuadro de escribir tarea*/
-    background-color: #F9FBFC;
+    background-color: #ffffff;
     border: 2px solid #b26cc0;
     border-radius: 5px;
     box-shadow: 0px 5px 50px rgba(177, 118, 189, 0.829);
@@ -29,16 +32,19 @@ form { /*fondo*/
     padding: 12px;
     height: 150px;
     width: calc(100% - 25px);
+    
   }
   
   textarea::placeholder {
     color: #A5A5A5;
     font-family: 'Montserrat';
     font-weight: 400;
+    
   }
   
   textarea:focus {
     outline-color: #61DAFA;
+    
   }
   
   .TodoForm-buttonContainer {
@@ -47,6 +53,7 @@ form { /*fondo*/
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    
   }
   
   .TodoForm-button {
@@ -60,6 +67,7 @@ form { /*fondo*/
     border-radius: 2px;
     border: none;
     font-family: 'Montserrat';
+    
   }
   
   .TodoForm-button--add {
