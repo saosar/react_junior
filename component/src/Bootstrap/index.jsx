@@ -46,7 +46,7 @@ function Bootstrap() {
         percentage = 100;
         return (
             <div>
-                <h1> No tienes tareas, <b> puedes ir de sople en paz </b></h1>
+                <h1> No tienes tareas, <b>  ⚝ puedes ir de sople en paz ⚝ </b></h1>
             </div>
         );
     } else {
