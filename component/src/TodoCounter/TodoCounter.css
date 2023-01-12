@@ -23,10 +23,14 @@ header {
 
 }
 
-/* PONER LA IMAGEN DE CORAZON DE FONDITO*/
+/* PONER LA IMAGEN DE CORAZON DE FONDITO solo se necesita la linea 29 para fondo*/
 body {
   height: 2000px;
   background-image: url('../Imagen/corazon.png');
+  background-size: 100%;
+  margin-top: 2%;
+  /* background-size: cover; */
+  
   /* background: #af68e22d; */
   /*CAJONCITO DEL BODY*/
   box-shadow: inset 0 -1px 0 rgb(36, 20, 107), rgba(192, 99, 161, 0.4) 0 1px 20px, inset 0 1px 0 rgb(255 255 255 / 20%);

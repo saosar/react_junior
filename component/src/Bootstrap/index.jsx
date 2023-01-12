@@ -34,7 +34,7 @@ import React from 'react';
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import { TodoContext } from '../TodoContext'
 import './Bootstrap.css';
-// import { Imagen } from '../Imagen'
+// import { Imagen } from '../Imagen';
 
 function Bootstrap() {
     const { totalTodos, completedTodos } = React.useContext(TodoContext);
@@ -46,8 +46,7 @@ function Bootstrap() {
         percentage = 100;
         return (
             <div>
-                <h1> No tienes tareas, puedes ir de sople en paz </h1>
-                {/* <img src={Imagen[0].img}/> */}
+                <h1> No tienes tareas, <b> puedes ir de sople en paz </b></h1>
             </div>
         );
     } else {

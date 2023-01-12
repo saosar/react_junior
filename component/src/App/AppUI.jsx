@@ -9,9 +9,7 @@ import { TodoForm } from '../TodoForm';
 import { CreateTodoButton } from '../CreateTodoButton';
 import { Modal } from '../Modal';
 import { Bootstrap } from '../Bootstrap';
-import { Imagen } from '../Imagen';
-// import corazon from '../Imagen/corazon.png';
-
+// import { Imagen } from '../Imagen';
 // import { Scroller } from '../Scroll';
 
 
@@ -59,8 +57,11 @@ function AppUI() {
             </Modal>
           )}
           
-          <Bootstrap />
-          <Imagen />
+          <Bootstrap>
+            {/* <Imagen />   */}
+          </Bootstrap> 
+           
+          
 
       <CreateTodoButton
         setOpenModal={setOpenModal}

@@ -35,7 +35,7 @@ function TodoForm() {
 
   return (
     <form onSubmit={onSubmit}>
-      <label>Escribe tu nuevo TODO</label>
+      <label>Escribe una nueva Tarea</label>
       <textarea
         value={newTodoValue}
         onChange={onChange}

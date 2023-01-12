@@ -56,17 +56,19 @@ form { /*fondo*/
     
   }
   
+  /* Cancelar y Añadir*/
   .TodoForm-button {
     cursor: pointer;
     display: inline-block;
     font-size: 20px;
-    color: #912a80;
+    color: #c93cb1;
     font-weight: 400;
     width: 120px;
     height: 48px;
     border-radius: 2px;
     border: none;
     font-family: 'Montserrat';
+    font-weight: bold;
     
   }
   

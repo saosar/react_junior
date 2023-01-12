@@ -1,8 +1,10 @@
 img {
-    position: relative;
+    border: 2px solid #bf71d979;
+    margin-top: 2%;
+    /* position: relative;
     width: 100%;
     height: 100vh;
-    z-index: 0;
+    z-index: 0; */
     /* background-size: cover; */
     
 }

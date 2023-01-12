@@ -1,9 +1,10 @@
+import React from 'react';
 import './Imagen.css';
-import corazon from './Baile.gif';
+import Baile from './Baile.gif';
 
 function Imagen(){
     return(
-        <img id="corazon" alt="corazon" src={corazon}></img>
+        <img id="Baile" alt="Baile" src={Baile}></img>
     );
 };
 
